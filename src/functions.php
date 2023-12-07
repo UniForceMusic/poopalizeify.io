@@ -47,19 +47,14 @@ function getAmountOfShits(string $sender, array $messages): int
 
 function getActiveDaysInChat(string $sender, array $dates, array $messages): int
 {
-    $daysActive = 0;
-
-    foreach ($dates as $date) {
+    foreach ($dates as $index => $date) {
         foreach ($messages as $message) {
             /** @var WhatsAppMessage $message */
             if ($message->matchesSender($sender) && $message->matchesDate($date)) {
-                $daysActive++;
-                break;
+                return (count($dates) - ($index));
             }
         }
     }
-
-    return $daysActive;
 }
 
 function getMostShitsInOneDay(string $sender, array $dates, array $messages): array
