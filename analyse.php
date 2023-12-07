@@ -24,7 +24,7 @@ foreach ($senders as $sender) {
         count($dates)
     );
     printFLn(
-        ' - this means this person shit an average of %f per day',
+        ' - this means this person shit an average of %s per day',
         round(
             ($shitCounter / $daysActive),
             2
