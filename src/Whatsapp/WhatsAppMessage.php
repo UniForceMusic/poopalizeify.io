@@ -16,10 +16,12 @@ class WhatsAppMessage
 
     public static function parseFromMatches(array $matches): static
     {
+        // $matches[0] = '23-11-2023 22:53 - Firstname Lastname: Message content';
+
         return new static(
-            $matches[1],
-            $matches[2],
-            $matches[3],
+            $matches[1], // 23-11-2023 22:53
+            $matches[2], // Firstname Lastname
+            $matches[3], // Message content
         );
     }
 
