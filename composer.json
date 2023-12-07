@@ -1,0 +1,18 @@
+{
+    "name": "uniforcemusic/poopalizeify.io",
+    "description": "An application to analyse your pooping habits",
+    "autoload": {
+        "psr-4": {
+            "src\\": "src/"
+        },
+        "files": [
+            "src/functions.php"
+        ]
+    },
+    "authors": [
+        {
+            "name": "UniForceMusic"
+        }
+    ],
+    "require": {}
+}
