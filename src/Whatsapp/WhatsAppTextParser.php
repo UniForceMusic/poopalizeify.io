@@ -6,7 +6,7 @@ use Exception;
 
 class WhatsAppTextParser
 {
-    public const MESSAGE_SPLIT_REGEX = '/([0-9]{2}-[0-9]{2}-[0-9]{4} [0-9]{2}\:[0-9]{2}) - (.[a-z|A-Z|0-9| |]*)\: (.*)/';
+    public const MESSAGE_SPLIT_REGEX = '/([0-9]{2}-[0-9]{2}-[0-9]{4} [0-9]{2}\:[0-9]{2}) - (.*)\: (.*)/';
 
     public static function parseTxt(string $filePath): array
     {
