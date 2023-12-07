@@ -55,6 +55,8 @@ function getActiveDaysInChat(string $sender, array $dates, array $messages): int
             }
         }
     }
+
+    return 0;
 }
 
 function getMostShitsInOneDay(string $sender, array $dates, array $messages): array
