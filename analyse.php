@@ -28,8 +28,7 @@ foreach ($senders as $sender) {
         round(
             ($shitCounter / $daysActive),
             2
-        ),
-        count($dates)
+        )
     );
     printLn('');
 }
