@@ -12,6 +12,8 @@ $dates = getAllDates($messages);
 foreach ($senders as $sender) {
     $shitCounter = getAmountOfShits($sender, $messages);
     $daysActive = getActiveDaysInChat($sender, $dates, $messages);
+    [$mostShitsDate, $mostShitsNumber] = getMostShitsInOneDay($sender, $dates, $messages);
+    [$streakBeginDate, $streakEndDate, $streakLength] = getLongestShitStreak($sender, $dates, $messages);
 
     printFLn('%s:', $sender);
     printFLn(
@@ -29,6 +31,17 @@ foreach ($senders as $sender) {
             ($shitCounter / $daysActive),
             2
         )
+    );
+    printFLn(
+        ' - the most brutal date for this person was %s with %d shits',
+        $mostShitsDate,
+        $mostShitsNumber
+    );
+    printFLn(
+        ' - the longest shit streak of this person was %d days from %s until %s',
+        $streakLength,
+        $streakBeginDate,
+        $streakEndDate
     );
     printLn('');
 }

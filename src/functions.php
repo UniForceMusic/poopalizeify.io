@@ -62,6 +62,84 @@ function getActiveDaysInChat(string $sender, array $dates, array $messages): int
     return $daysActive;
 }
 
+function getMostShitsInOneDay(string $sender, array $dates, array $messages): array
+{
+    $mostShitsDate = '';
+    $mostShitsNumber = 0;
+
+    foreach ($dates as $date) {
+        $shits = 0;
+
+        foreach ($messages as $message) {
+            /** @var WhatsAppMessage $message */
+            if ($message->matchesSender($sender) && $message->matchesDate($date) && $message->containsCheck()) {
+                $shits++;
+            }
+        }
+
+        if ($shits > $mostShitsNumber) {
+            $mostShitsDate = $date;
+            $mostShitsNumber = $shits;
+        }
+    }
+
+    return [str_replace('-', ' ', $mostShitsDate), $mostShitsNumber];
+}
+
+function getLongestShitStreak(string $sender, array $dates, array $messages): array
+{
+    $datesWithShitBool = [];
+
+    foreach ($dates as $date) {
+        $datesWithShitBool[$date] = false;
+
+        foreach ($messages as $message) {
+            /** @var WhatsAppMessage $message */
+            if ($message->matchesSender($sender) && $message->matchesDate($date) && $message->containsCheck()) {
+                $datesWithShitBool[$date] = true;
+                break;
+            }
+        }
+    }
+
+    $beginDate = '';
+    $endDate = '';
+    $currentStreak = 0;
+
+    $highestBeginDate = '';
+    $highestEndDate = '';
+    $highestStreakNumber = $currentStreak;
+
+    $firstLoop = true;
+
+    foreach ($datesWithShitBool as $date => $hasShit) {
+        if ($firstLoop && $hasShit) {
+            $currentStreak = 0;
+            $beginDate = $date;
+            $firstLoop = false;
+        }
+
+        if ($hasShit) {
+            $currentStreak++;
+            $endDate = $date;
+        } else {
+            $firstLoop = true;
+        }
+
+        if ($currentStreak > $highestStreakNumber) {
+            $highestStreakNumber = $currentStreak;
+            $highestBeginDate = $beginDate;
+            $highestEndDate = $endDate;
+        }
+    }
+
+    return [
+        $highestBeginDate,
+        $highestEndDate,
+        $highestStreakNumber
+    ];
+}
+
 function printLn(mixed $content): void
 {
     if (is_array($content) || is_object($content)) {
