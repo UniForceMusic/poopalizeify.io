@@ -8,6 +8,9 @@ class WhatsAppTextParser
 {
     public const MESSAGE_SPLIT_REGEX = '/([0-9]{2}-[0-9]{2}-[0-9]{4} [0-9]{2}\:[0-9]{2}) - (.[^\:]*)\: (.*)/';
 
+    /**
+     * @return WhatsAppMessage[]
+     */
     public static function parseTxt(string $filePath): array
     {
         $fileContents = static::getFileContents($filePath);

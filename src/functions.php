@@ -7,6 +7,9 @@ function arrayUnique(array $array): array
     return array_values(array_unique($array));
 }
 
+/**
+ * @return string[]
+ */
 function getAllSenders(array $whatsAppMessages): array
 {
     $senders = [];
@@ -19,6 +22,9 @@ function getAllSenders(array $whatsAppMessages): array
     return arrayUnique($senders);
 }
 
+/**
+ * @return string[]
+ */
 function getAllDates(array $whatsAppMessages): array
 {
     $dates = [];
