@@ -8,7 +8,7 @@ class WhatsAppMessage
 {
     public const WHATSAPP_TIMESTAMP_FORMAT = 'd-m-Y H:i'; // 23-11-2023 22:53;
     public const DATE_ONLY_FORMAT = 'Y-m-d';
-    public const CHECK_MARK = '✅';
+    public const CHECK_MARKS = ['✅', '🆘'];
 
     public DateTime $sentAt;
     public string $sender;
@@ -39,7 +39,13 @@ class WhatsAppMessage
 
     public function containsCheck(): bool
     {
-        return str_contains($this->message, $this::CHECK_MARK);
+        foreach ($this::CHECK_MARKS as $checkmark) {
+            if (str_contains($this->message, $checkmark)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public function matchesDate(string $yyyymmddString): bool
