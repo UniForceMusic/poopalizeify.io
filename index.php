@@ -50,7 +50,7 @@ use src\Whatsapp\WhatsAppTextParser;
                 // For people who do not poop
                 if ($shitCounter == 0) {
                     td('This person does not poop');
-                    td();
+                    td($sender);
                     td();
                     td();
                     td();
