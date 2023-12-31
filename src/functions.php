@@ -86,7 +86,7 @@ function getMostShitsInOneDay(string $sender, array $dates, array $messages): ar
         }
     }
 
-    return [str_replace('-', ' ', $mostShitsDate), $mostShitsNumber];
+    return [dateToWrittenDate($mostShitsDate), $mostShitsNumber];
 }
 
 function getLongestShitStreak(string $sender, array $dates, array $messages): array
@@ -137,10 +137,16 @@ function getLongestShitStreak(string $sender, array $dates, array $messages): ar
     }
 
     return [
-        $highestBeginDate,
-        $highestEndDate,
+        dateToWrittenDate($highestBeginDate),
+        dateToWrittenDate($highestEndDate),
         $highestStreakNumber
     ];
+}
+
+function dateToWrittenDate(string $date): string
+{
+    return DateTime::createFromFormat('Y-m-d', $date)
+        ->format('j F Y');
 }
 
 function printLn(mixed $content): void
@@ -159,4 +165,19 @@ function printFLn(string $template, ...$args): void
 {
     echo sprintf($template, ...$args);
     echo PHP_EOL;
+}
+
+function startTag(string $tagName): void
+{
+    echo sprintf('<%s>', $tagName);
+}
+
+function endTag(string $tagName): void
+{
+    echo sprintf('</%s>', $tagName);
+}
+
+function td(mixed $contents = ''): void
+{
+    echo sprintf('<td>%s</td>', $contents);
 }
