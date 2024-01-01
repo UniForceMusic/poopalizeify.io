@@ -143,8 +143,12 @@ function getLongestShitStreak(string $sender, array $dates, array $messages): ar
     ];
 }
 
-function dateToWrittenDate(string $date): string
+function dateToWrittenDate(mixed $date): string
 {
+    if (!$date) {
+        return 'invalid date';
+    }
+
     return DateTime::createFromFormat('Y-m-d', $date)
         ->format('j F Y');
 }
